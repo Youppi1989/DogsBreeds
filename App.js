@@ -7,13 +7,14 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import Breeds from "./screens/Breeds";
 import BreedsDetail from "./screens/BreedsDetail";
+import Favourites from "./screens/Favourites/Index";
 
 const Stack = createStackNavigator();
-function MyStack() {
+function BreedStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Breeds" component={Breeds} />
-      <Stack.Screen name="BreedDetail" component={BreedsDetail} />
+      <Stack.Screen name="BreedsDetail" component={BreedsDetail} />
     </Stack.Navigator>
   );
 }
@@ -22,7 +23,8 @@ const Tab = createBottomTabNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator screenOptions={{ headerShown: false }}>
-      <Tab.Screen name="Home" component={MyStack} />
+      <Tab.Screen name="Домой" component={BreedStack} />
+      <Tab.Screen name="Избранные" component={Favourites} />
     </Tab.Navigator>
   );
 }
