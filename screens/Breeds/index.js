@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import axios from "axios";
 
+import { getAllBreeds } from "../../api/breeds";
+
 export default function Breeds({ navigation }) {
   const [url, setUrl] = useState();
   const [name, setName] = useState();
@@ -16,10 +18,10 @@ export default function Breeds({ navigation }) {
 
   const loadData = async () => {
     const breeds = await axios.get("https://api.thedogapi.com/v1/breeds");
+
     const data = breeds.data;
     setBreeds(data);
     const dog = data[4];
-    console.log(dog);
     console.log(dog.name);
     console.log(dog.image.url);
     setUrl(dog.image?.url);
