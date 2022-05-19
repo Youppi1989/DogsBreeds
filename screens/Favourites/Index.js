@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { FlatList, StyleSheet, SafeAreaView } from "react-native";
+import axios from "axios";
+import Favourite from "./Favourite";
+
+axios.defaults.headers.common["x-api-key"] =
+  "f850d84a-058f-4883-a993-62278d1e664f";
 
 export default function Favourites() {
   const [favourites, setFavourites] = useState();
 
-  const saveToFavourites = async () => {
+  const loadFavourites = async () => {
     try {
-      const result = await axios.post(
-        "https://api.thedogapi.com/v1/favourites",
-        {
-          image_id: image.id,
-        }
+      const favourites = await axios.get(
+        "https://api.thedogapi.com/v1/favourites"
       );
-
-      console.log(result);
+      setFavourites(favourites.data);
     } catch (error) {
       console.log(error);
     }
   };
-
-  const renderItem = ({ item }) => <Favourites item={item} />;
-
   useEffect(() => {
-    loadData();
-  }, []);
+    loadFavourites();
+  }, [favourites]);
+
+  const renderItem = ({ item }) => <Favourite item={item} />;
 
   return (
     <SafeAreaView style={styles.container}>
@@ -32,8 +32,10 @@ export default function Favourites() {
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
       />
-      <Button title="Добавить в избранное" onPress={() => saveToFavourites()} />
-      s
     </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {},
+});

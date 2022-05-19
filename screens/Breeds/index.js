@@ -1,7 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { Text, View, StyleSheet, Image, FlatList } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  Image,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import axios from "axios";
-import { TouchableOpacity } from "react-native-gesture-handler";
 
 export default function Breeds({ navigation }) {
   const [url, setUrl] = useState();
@@ -37,9 +43,9 @@ export default function Breeds({ navigation }) {
           <TouchableOpacity onPress={() => onBreedsPress(item)}>
             <Image
               source={{ uri: item.image?.url }}
-              style={{ height: 300, width: 300 }}
+              style={{ height: 300, width: 300, borderRadius: 12 }}
             />
-            <Text>{item.name}</Text>
+            <Text style={styles.item}>{item.name}</Text>
           </TouchableOpacity>
         )}
         keyExtractor={(item) => item.id}
@@ -52,14 +58,30 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: 20,
-    backgroundColor: "#ecf0f1",
-    padding: 30,
+    backgroundColor: "white",
+    padding: 10,
     alignItems: "center",
     marginTop: 40,
+    margin: 19,
+    marginBottom: 50,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 3,
+      height: 2,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 5,
+    elevation: 1,
+  },
+  item: {
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
   },
   paragraph: {
     margin: 24,
-    fontSize: 40,
+    fontSize: 50,
     fontWeight: "bold",
     textAlign: "center",
   },
